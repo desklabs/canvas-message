@@ -1,0 +1,12 @@
+{
+  "name": "Message Canvas",
+  "description": "A Desk.com canvas app that allows to show a message to your agents.",
+  "keywords": ["productivity", "service", "canvas", "message"],
+  "website": "https://github.com/desklabs/canvas-message",
+  "repository": "https://github.com/desklabs/canvas-message.git",
+  "logo": "http://webassets.desk.com/resources/images/icons/favicon-apple-114x114.png?v=3.5",
+  "success_url": "https://login.desk.com",
+  "env": {
+    "NODE_ENV": "production"
+  }
+}
