@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Canvas Message</title>
+    <meta name="description" content="A Desk.com canvas app that allows to show a message to your agents.">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700,600" media="screen" rel="stylesheet" type="text/css" />
+    <style>
+      html {
+        font-size: 100%;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+      }
+
+      html, body {
+        height: 100%;
+        overflow: hidden;
+        width: 100%;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 13px;
+        line-height: 19px;
+        color: #3e4651;
+        background: #eee;
+      }
+
+      p {
+        margin: 7px auto;
+        overflow: hidden;
+        white-space: nowrap;
+        box-sizing: border-box;
+        font-weight: bolder;
+      }
+
+    </style>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="//ajax.deskapi.com/libs/desk/canvas/1.0.0/desk-canvas-all.js"></script>
+    <script>
+      (function() {
+        Object.defineProperty(window.location, 'query', {
+          get: function() {
+            this._query = this._query || (function(a) {
+              if (a == '') return {}
+              var b = {}
+              for (var i = 0; i < a.length; ++i) {
+                var p = a[i].split('=')
+                if (p.length != 2) continue;
+                b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, ' '))
+              }
+              return b
+            })(this.search.substr(1).split('&'))
+            return this._query
+          }
+        })
+
+
+        Desk.canvas.client.refreshSignedRequest(function(data) {
+          if (data.status == 200) {
+            var sr  = data.payload.response.split('.')[1]
+              , ctx = JSON.parse(Desk.canvas.decode(sr))
+              , id  = window.location.query['id']
+
+            Desk.canvas.client.ajax('/api/v2/articles/' + id, {
+              client: ctx.client,
+              method: 'GET',
+              success : function(data) {
+                console.log(data)
+                if (data.status === 200) {
+                  document.querySelector('p').innerText = data.payload.subject
+                }
+              }
+            })
+          }
+        })
+      }())
+    </script>
+  </head>
+  <body>
+    <p></p>
+  </body>
+</html>

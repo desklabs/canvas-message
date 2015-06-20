@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+
+var resolve = require('path').resolve
+  , connect = require('connect')
+  , https = require('https')
+  , fs = require('fs');
+
+var server = connect()
+  , path = resolve('.')
+  , port = process.env['PORT'] || 3000;
+
+server.use(connect.logger('dev'))
+      .use(function(req, res, next) { req.method = 'GET'; next(); })
+      .use(connect.compress())
+      .use(connect.static(resolve('.'), { redirect: false }))
+
+
+if (process.env['NODE_ENV'] && process.env['NODE_ENV'] == 'development') {
+  var options = {
+    key: fs.readFileSync(resolve('certs/server.key')),
+    cert: fs.readFileSync(resolve('certs/server.crt')),
+    ca: fs.readFileSync(resolve('certs/server.csr'))
+  }
+
+  server = https.createServer(options, server)
+}
+
+server.listen(port, function() {
+  console.log('\033[90mserving \033[36m%s\033[90m on port \033[96m%d\033[0m', path, port);
+});
