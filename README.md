@@ -1,4 +1,4 @@
-# Desk.com Message Canvas
+# Desk.com Canvas Message
 This is a Desk.com canvas application that allows you to share a company wide message with all your support agents. You can display this message anywhere on your case layout.
 
 ![Preview](https://api.monosnap.com/rpc/file/download?id=txdv7AWondcYhjjxuXI8OO7yiuxoai)
