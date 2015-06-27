@@ -42,7 +42,7 @@
     <![endif]-->
     <script src="//ajax.deskapi.com/libs/desk/canvas/1.0.0/desk-canvas-all.js"></script>
     <script>
-      (function() {
+      Desk.canvas(function() {
         Object.defineProperty(window.location, 'query', {
           get: function() {
             this._query = this._query || (function(a) {
@@ -61,7 +61,7 @@
 
 
         Desk.canvas.client.refreshSignedRequest(function(data) {
-          if (data.status == 200) {
+          if (data.status === 200) {
             var sr  = data.payload.response.split('.')[1]
               , ctx = JSON.parse(Desk.canvas.decode(sr))
               , id  = window.location.query['id']
@@ -70,7 +70,6 @@
               client: ctx.client,
               method: 'GET',
               success : function(data) {
-                console.log(data)
                 if (data.status === 200) {
                   document.querySelector('p').innerText = data.payload.subject
                 }
@@ -78,7 +77,7 @@
             })
           }
         })
-      }())
+      })
     </script>
   </head>
   <body>
