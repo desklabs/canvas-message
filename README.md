@@ -7,7 +7,7 @@ This is a Desk.com canvas application that allows you to share a company wide me
 ### Deploy the Application
 The first step to install this application is to deploy the source code to your Heroku account. Simply click this button and the application will be deployed.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https%3A%2F%2Fgithub.com%2Fdesklabs%2Fcanvas-message)
 
 ### Create an Article
 The message shown in the canvas application is essentially the subject of a hidden article. Just go ahead and create an article but don't forget to take a note of the article id.
